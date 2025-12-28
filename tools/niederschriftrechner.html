@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Rechner zur Niederschrift der Abschlussprüfung</title>
+
+<style>
+body { font-family: Arial, sans-serif; }
+
+table {
+    border-collapse: collapse;
+    width: 1200px;
+}
+
+td, th {
+    border: 0px solid #000;
+    padding: 4px;
+}
+
+th {
+    background: #e6e6e6;
+    text-align: left;
+}
+.ok {
+    background: #C8E6C9;
+}
+.med {
+    background: #FFF3CD;
+}
+
+.nok {
+    background: #F8D7DA;
+}
+
+.input {
+    background: #cfe8ff;
+}
+
+.calc {
+    background: #fcf6c8;
+}
+.calcmep {
+    background: #f8cfa8;
+}
+input {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: right;
+    padding: 4px;
+}
+/* Styling, wenn die Zahl außerhalb von min/max liegt */
+input:out-of-range {
+  border: 2px solid #e74c3c; /* Rot */
+  background-color: #fdf2f2;
+}
+
+</style>
+</head>
+
+<body>
+
+<h3>Rechner zur Niederschrift der Abschlussprüfung</h3>
+
+<table>
+<tr>
+    <th>Legende</th>
+</tr>
+<tr>
+<td class="input">Eingabefeld</td>
+</tr>
+<tr>
+<td class="calc">Berechnung, auf die Niederschrift zu übertragen</td>
+</tr>
+<tr>
+<td class="calcmep">Berechnung auf der Niederschrift zu korrigieren sofern eine MEP vorliegt (Werte sind bereits vorausgefüllt)</td>
+</tr>
+</table>
+<br>
+<table>
+<tr>
+    <th>Projektbericht</th>
+    <th>Punkte</th>
+    <th>Gewichtung (%)</th>
+    <th>Ergebnis</th>
+	<td>&nbsp;</td>
+    <th>Präsentation und Fachgespräch</th>
+    <th>Punkte</th>
+    <th>Gewichtung</th>
+    <th>Ergebnis</th>
+</tr>
+
+<tr>
+<td>1. Ausgangssituation</td>
+<td class="input"><input id="PI1" type="number" min="0" max="100"></td>
+<td>15%</td>
+<td class="calc"><input id="PO1" readonly></td>
+<td></td>
+<td>Präsentation – Aufbau und inhaltliche Struktur</td>
+<td class="input"><input id="T3" type="number" min="0" max="100"></td>
+<td>1/3</td>
+<td class="calc"><input id="W3" readonly></td>
+</tr>
+
+<tr>
+<td>2. Ressourcen und Ablaufplanung</td>
+<td class="input"><input id="PI2" type="number" min="0" max="100"></td>
+<td>15%</td>
+<td class="calc"><input id="PO2" readonly></td>
+<td></td>
+<td>Präsentation – Sprachliche Gestaltung</td>
+<td class="input"><input id="T4" type="number" min="0" max="100"></td>
+<td>1/3</td>
+<td class="calc"><input id="W4" readonly></td>
+</tr>
+
+<tr>
+<td>3. Durchführung und Auftragsbearbeitung</td>
+<td class="input"><input id="PI3" type="number" min="0" max="100"></td>
+<td>30%</td>
+<td class="calc"><input id="PO3" readonly></td>
+<td></td>
+<td>Präsentation – Zielgruppengerechte Darstellung</td>
+<td class="input"><input id="T5" type="number" min="0" max="100"></td>
+<td>1/3</td>
+<td class="calc"><input id="W5" readonly></td>
+</tr>
+
+<tr>
+<td>4. Projektergebnisse</td>
+<td class="input"><input id="PI4" type="number" min="0" max="100"></td>
+<td>15%</td>
+<td class="calc"><input id="PO4" readonly></td>
+<td></td>
+<th colspan="3">Präsentation - Zwischensumme</th>
+<th class="calc"><input id="W6" readonly></th>
+</tr>
+
+<tr>
+<td>5. Gestaltung des Portfolios</td>
+<td class="input"><input id="PI5" type="number" min="0" max="100"></td>
+<td>15%</td>
+<td class="calc"><input id="PO5" readonly></td>
+<td></td>
+<td>Fachgespräch – Beherrschung des für die Projektarbeit relevanten Fachhintergrundes</td>
+<td class="input"><input id="T7" type="number" min="0" max="100"></td>
+<td>1/3</td>
+<td class="calc"><input id="W7" readonly></td>
+</tr>
+
+<tr>
+<td>Kundendokumentation</td>
+<td class="input"><input id="PI6" type="number" min="0" max="100"></td>
+<td>10%</td>
+<td class="calc"><input id="PO6" readonly></td>
+<td></td>
+<td>Fachgespräch – Problemerfassung</td>
+<td class="input"><input id="T8" type="number" min="0" max="100"></td>
+<td>1/3</td>
+<td class="calc"><input id="W8" readonly></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Fachgespräch – Argumentation und Begründung</td>
+<td class="input"><input id="T9" type="number" min="0" max="100"></td>
+<td>1/3</td>
+<td class="calc"><input id="W9" readonly></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<th colspan="3">Fachgespräch - Zwischensumme</th>
+<td class="calc"><input id="W10" readonly></td>
+</tr>
+
+<tr>
+<th colspan="3">Gesamtbewertung Projektbericht</th>
+<td class="calc"><input id="PO7" readonly></td>
+
+<td></td>
+<th colspan="3">Gesamtbewertung Präsentation & Fachgespräch</th>
+<td class="calc"><input id="W12" readonly></td>
+</tr>
+
+</table>
+<br>
+<table>
+<tr>
+    <th>Teil 1 der Abschlussprüfung</th>
+    <th>Punkte</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+	<th>&nbsp;</th>
+    <th>Erg. 1</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>Punkte</th>
+    <th>Note B</th>
+    <th>&nbsp;</th>
+
+</tr>
+<tr>
+<td>Einrichten eines IT-gestützten Arbeitsplatzes</td>
+<td class="input"><input id="T1I1" type="number" min="0" max="100"></td>
+<td>x</td>
+<td>20</td>
+<td>=</td>
+<td><input id="T1O1" readonly></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><input id="T1O2" readonly></td>
+<td><input id="T1O3" readonly></td>
+</tr>
+
+<tr>
+<td>Ergebnis Teil 1 der Abschlussprüfung</td>
+<td>Summe Teil 1</td>
+<td></td>
+<td></td>
+<td></td>
+<td><input id="T1O4" readonly></td>
+<td>:</td>
+<td>20</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><input id="T1O5" readonly></td>
+<td><input id="T1O6" readonly></td>
+</tr>
+
+<tr>
+    <th>Teil 2 der Abschlussprüfung</th>
+    <th>Punkte</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+	<th>&nbsp;</th>
+    <th>MEpr</th>
+    <th>&nbsp;</th>
+	<th>Erg. 1</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>Erg. 2</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>Punkte</th>
+    <th>Note B</th>
+    <th>&nbsp;</th>
+</tr>
+
+<tr>
+<td>Konzeption und Administration von IT-Systemen</td>
+<td class="input"><input id="T2I1" type="number" min="0" max="100"></td>
+<td>x</td>
+<td>2</td>
+<td>+</td>
+<td class="input"><input id="T2I2" type="number" min="0" max="100"></td>
+<td>=</td>
+<td id="TDT2O1"><input id="T2O1" readonly></td>
+<td>:</td>
+<td>3</td>
+<td>=</td>
+<td id="TDT2O2"><input id="T2O2" readonly></td>
+<td>x</td>
+<td>10</td>
+<td>=</td>
+<td id="TDT2O3"><input id="T2O3" readonly></td>
+<td></td>
+<td></td>
+<td></td>
+<td id="TDT2O4"><input id="T2O4" readonly></td>
+<td id="TDT2O5"><input id="T2O5" readonly></td>
+<td id="bes1">&nbsp;</td>
+</tr>
+
+<tr>
+<td>Analyse und Entwicklung von Netzwerken</td>
+<td class="input"><input id="T2I3" type="number" min="0" max="100"></td>
+<td>x</td>
+<td>2</td>
+<td>+</td>
+<td class="input"><input id="T2I4" type="number" min="0" max="100"></td>
+<td>=</td>
+<td id="TDT2O6"><input id="T2O6" readonly></td>
+<td>:</td>
+<td>3</td>
+<td>=</td>
+<td id="TDT2O7"><input id="T2O7" readonly></td>
+<td>x</td>
+<td>10</td>
+<td>=</td>
+<td id="TDT2O8"><input id="T2O8" readonly></td>
+<td></td>
+<td></td>
+<td></td>
+<td id="TDT2O9"><input id="T2O9" readonly></td>
+<td id="TDT2O10"><input id="T2O10" readonly></td>
+<td id="bes2">&nbsp;</td>
+</tr>
+
+<tr>
+<td>Wirtschafts- und Sozialkunde</td>
+<td class="input"><input id="T2I5" type="number" min="0" max="100"></td>
+<td>x</td>
+<td>2</td>
+<td>+</td>
+<td class="input"><input id="T2I6" type="number" min="0" max="100"></td>
+<td>=</td>
+<td id="TDT2O11"><input id="T2O11" readonly></td>
+<td>:</td>
+<td>3</td>
+<td>=</td>
+<td id="TDT2O12"><input id="T2O12" readonly></td>
+<td>x</td>
+<td>10</td>
+<td>=</td>
+<td id="TDT2O13"><input id="T2O13" readonly></td>
+<td></td>
+<td></td>
+<td></td>
+<td id="TDT2O14"><input id="T2O14" readonly></td>
+<td id="TDT2O15"><input id="T2O15" readonly></td>
+<td id="bes3">&nbsp;</td>
+</tr>
+
+<tr>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Betriebliche Projektarbeit</td>
+<td><input id="E1" readonly></td>
+<td>x</td>
+<td>50</td>
+<td>=</td>
+<td class="calc"><input id="E2" readonly></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>Präsentation und Fachgespräch
+</td>
+<td><input id="E3" readonly></td>
+<td>x</td>
+<td>50</td>
+<td>=</td>
+<td class="calc"><input id="E4" readonly></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Planen und Umsetzen eines Projekts der Systemintegration
+</td>
+<td>SUMME</td>
+<td></td>
+<td></td>
+<td></td>
+<td class="calc"><input id="E5" readonly></td>
+<td>:</td>
+<td>100</td>
+<td></td>
+<td></td>
+
+<td>=</td>
+<td class="calc"><input id="E6" readonly></td>
+<td>x</td>
+<td>50</td>
+<td>=</td>
+<td class="calc"><input id="E7" readonly></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="calc"><input id="E8" readonly></td>
+<td class="calc"><input id="E9" readonly></td>
+<td id="bes4">&nbsp;</td>
+</tr>
+
+<td>Ergebnis Teil 2 der Abschlussprüfung
+</td>
+<td>SUMME Teil 2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="calc"><input id="E10" readonly></td>
+<td>:</td>
+<td>80</td>
+<td>=</td>
+<td class="calc"><input id="E11" readonly></td>
+<td class="calc"><input id="E12" readonly></td>
+<td id="bes5">&nbsp;</td>
+</tr>
+
+<tr>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+	<th>Gesamtergebnis
+	</th>
+	<td>( SUMME Teil</td>
+	<td>1</td>
+	<td></td>
+	<td></td>
+	<td><input id="E13" readonly></td>
+	<td>+</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td>Summe Teil</td>
+	<td>2</td>
+	<td></td>
+	<td></td>
+	<td><input id="E14" readonly></td>
+	<td>):</td>
+	<td>100</td>
+	<td>=</td>
+	<td class="calc"><input id="E15" readonly></td>
+	<td class="calc"><input id="E16" readonly></td>
+	<td id="bes6">&nbsp;</td>
+</tr>
+
+<tr>
+	<th>Bestehen
+	</th>
+	<td colspan=21 id="bes7"></td>
+</tr>
+</table>
+<br>
+
+<br>
+<table>
+<tr><td>Ohne mdl. Ergänzungsprüfung (MEpr) ist Erg.2=Punkte</td></tr>
+<tr>
+<th>
+Erläuterung zum Bestehen der Prüfung:
+</th>
+</tr>
+<tr>
+<th>
+Die Abschlussprüfung ist bestanden, wenn die Prüfungsleistungen - auch unter Berücksichtigung einer mündlchen Ergänzungsprüfung - 
+<div id="gesamtergebnis">im Gesamtergebnis von Teil 1 und Teil 2 mit mindestens ausreichend,</div>
+<div id="ergebnisteil2">im Ergebnis von Teil 2 mit mindestens ausreichend,</div>
+<div id="teil2mindestens4">in mindestens drei Prüfungsbereichen von Teil 2 mit mindestens ausreichend und</div>
+<div id="teil2nicht6">in keinem Prüfungsbereich von Teil 2 mit ungenügend</div>
+bewertet worden sind.
+</th>
+</tr>
+</table>
+
+<script>
+function roundup(x) {
+    return Math.ceil(x);
+}
+
+function num(id) {
+    const v = document.getElementById(id).value;
+    return v === "" ? null : Number(v);
+}
+
+function calcWeighted(T, V) {
+    const t = num(T);
+    if (t === null) return "";
+    return (t * V );
+}
+function roundCommercial(x) {
+    return Math.round(x);
+}
+
+function recalcTeil1(){
+    T1O1.value = calcWeighted("T1I1", 20);
+	T1O4.value = num("T1O1");
+	E13.value = num("T1O4"); // E13 = Gesamtergebnis Summe Tail 1
+	T1O2.value = num("T1I1");
+	T1O5.value = num("T1I1");
+	T1O3.value = noteFromPunkte(num("T1O2"));
+	T1O6.value = noteFromPunkte(num("T1O5"));
+	recalcGesamt();
+
+}
+
+
+    document.getElementById("T1I1").addEventListener("input", recalcTeil1);
+
+function calcTeil2Erg(Punkte, Faktor1, Mepr, Faktor2, Faktor3){
+	//arr[0] --> Erg.1
+	//arr[1] --> Erg.2
+	//arr[2] --> Erg.3
+	
+	arr=[];
+	if (Mepr == null || Mepr ==0)
+	{
+		arr[0]=null;
+	}
+	else arr[0] = ((Punkte * Faktor1) + Mepr);
+	if (arr[0]===null){
+		arr[1]=Punkte;
+	}
+	else{
+		arr[1]=arr[0]/Faktor2;
+	}
+	arr[2]=arr[1]*Faktor3;
+	return (arr)
+}
+
+  function updateCellClass(rowId, value) {
+    const row = document.getElementById(rowId);
+    if (!row) return;
+
+    row.classList.remove("calcmep", "input", "calc","ok","nok","med");
+	if (value !=""){ 
+		row.classList.add(value);
+	}
+  }
+  
+function recalcTeil2(){
+	//"T2I1" Punkte zu Konzeption und Administration von IT-Systemen
+	//"T2I2" MEpr zu Konzeption und Administration von IT-Systemen
+	//"21O1" Erg.1 zu Konzeption und Administration von IT-Systemen
+	//"21O2" Erg.2 zu Konzeption und Administration von IT-Systemen
+
+	resarr = calcTeil2Erg(num("T2I1"), 2, num("T2I2"),3,10)
+    T2O1.value = roundCommercial(resarr[0]); // Erg.1 zu Konzeption und Administration von IT-Systemen
+    T2O2.value = roundCommercial(resarr[1]); // Erg.2 zu Konzeption und Administration von IT-Systemen
+    T2O3.value = roundCommercial(resarr[2]); // Erg.3 (Punkte zum Übertrag) zu Konzeption und Administration von IT-Systemen
+	T2O4.value = num("T2O2");
+	T2O5.value = noteFromPunkte(num("T2O4"));// Note zu Konzeption und Administration von IT-Systemen
+
+	const map = {
+	  6: "nok",
+	  5: "med"
+	};
+	updateCellClass("bes1", map[num("T2O5")] ?? "ok");
+
+
+	//"T2I3" Punkte zu Konzeption und Administration von IT-Systemen
+	//"T2I4" MEpr zu Konzeption und Administration von IT-Systemen
+	//"21O6" Erg.1 zu Konzeption und Administration von IT-Systemen
+	//"21O7" Erg.2 zu Konzeption und Administration von IT-Systemen
+
+	resarr = calcTeil2Erg(num("T2I3"), 2, num("T2I4"),3,10)
+    T2O6.value = roundCommercial(resarr[0]); // Erg.1 zu Analyse und Entwicklung von Netzwerken
+    T2O7.value = roundCommercial(resarr[1]); // Erg.2 zu Analyse und Entwicklung von Netzwerken
+    T2O8.value = roundCommercial(resarr[2]); // Erg.3 (Punkte zum Übertrag) zu Analyse und Entwicklung von Netzwerken
+	T2O9.value = num("T2O7");
+	T2O10.value = noteFromPunkte(num("T2O9")); // Note zu Analyse und Entwicklung von Netzwerken
+	
+
+	updateCellClass("bes2", map[num("T2O10")] ?? "ok");
+	
+	//"T2I5" Punkte zu Konzeption und Administration von IT-Systemen
+	//"T2I6" MEpr zu Konzeption und Administration von IT-Systemen
+	//"21O11" Erg.1 zu Konzeption und Administration von IT-Systemen
+	//"21O12" Erg.2 zu Konzeption und Administration von IT-Systemen
+
+	resarr = calcTeil2Erg(num("T2I5"), 2, num("T2I6"),3,10)
+    T2O11.value = roundCommercial(resarr[0]); // Erg.1 zu Analyse und Entwicklung von Netzwerken
+    T2O12.value = roundCommercial(resarr[1]); // Erg.2 zu Analyse und Entwicklung von Netzwerken
+    T2O13.value = roundCommercial(resarr[2]); // Erg.3 (Punkte zum Übertrag) zu Analyse und Entwicklung von Netzwerken
+	T2O14.value = num("T2O12");
+	T2O15.value = noteFromPunkte(num("T2O14"));// Note zu Analyse und Entwicklung von Netzwerken
+	updateCellClass("bes3", map[num("T2O15")] ?? "ok");
+	
+	if (num("T2I2") == null){ // MEP zu Konzeption und Administration von IT-Systemen
+		klasse="";
+	}
+	else {
+		klasse="calcmep";
+	}
+	["TDT2O1","TDT2O2","TDT2O3","TDT2O4","TDT2O5"].forEach(cell =>{
+		updateCellClass(cell,klasse);
+	});
+	if (num("T2I4") == null){ // MEP zu Analyse und Entwicklung von Netzwerken
+		klasse="";
+	}
+	else {
+		klasse="calcmep";
+	}
+	["TDT2O6","TDT2O7","TDT2O8","TDT2O9","TDT2O10"].forEach(cell =>{
+		updateCellClass(cell,klasse);
+	});
+	if (num("T2I6") == null){ // MEP zu Wirtschafts- und Sozialkunde
+		klasse="";
+	}
+	else {
+		klasse="calcmep";
+	}
+	["TDT2O11","TDT2O12","TDT2O13","TDT2O14","TDT2O15"].forEach(cell =>{
+		updateCellClass(cell,klasse);
+	});
+	recalcSummeTeil2()
+}
+
+["T2I1","T2I2","T2I3","T2I4","T2I5","T2I6"].forEach(id =>
+    document.getElementById(id).addEventListener("input", recalcTeil2)
+);
+
+function recalcSummeTeil2(){
+	E10.value=(num("T2O3")+num("T2O8")+num("T2O13")+num("E7"));
+	E11.value=roundCommercial(num("E10")/80);
+	E12.value=noteFromPunkte(num("E11"));
+	if (num("E12")<5){updateCellClass("bes5","ok")}
+	else{updateCellClass("bes5","nok")}
+	E14.value=(num("E10"));
+	recalcGesamt();
+}
+
+function recalcGesamt(){
+	bestanden=true;
+
+	
+	E15.value=roundCommercial((num("E13")+num("E14"))/100);
+	E16.value=noteFromPunkte(num("E15"));
+	const map = {
+	  6: "nok",
+	  5: "nok"
+	};
+	updateCellClass("bes6", map[num("E16")] ?? "ok");
+	updateCellClass("gesamtergebnis", map[num("E16")] ?? "ok");	
+	updateCellClass("ergebnisteil2", map[num("E12")] ?? "ok");	
+
+	if (num("E16")>=5 ||num("E12")>=5){
+		bestanden=false;
+	}
+
+	
+	values = [
+		num("T2O5"),
+		num("T2O10"),
+		num("T2O15"),
+		num("E9")
+	];
+	count = values.filter(v => v >= 1 && v <= 4).length;
+	updateCellClass("teil2mindestens4", count >= 3 ? "ok" : "nok");
+	if (count < 3){
+		bestanden=false;
+	}
+
+	count = values.filter(v => v == 6).length;	
+	updateCellClass("teil2nicht6", count >= 1 ? "nok" : "ok");
+	if (count != 0){
+		bestanden=false;
+		}
+
+	updateCellClass("bes7", bestanden==true ? "ok" : "nok");
+
+
+}
+
+function recalc() {
+    W3.value = calcWeighted("T3", 1/3);
+    W4.value = calcWeighted("T4", 1/3);
+    W5.value = calcWeighted("T5", 1/3);
+
+    W6.value = roundCommercial(
+        (num("W3") || 0) + (num("W4") || 0) + (num("W5") || 0)
+    );
+	W3.value = roundCommercial(num("W3"))
+	W4.value = roundCommercial(num("W4"))
+	W5.value = roundCommercial(num("W5"))
+
+    W7.value = calcWeighted("T7", 1/3);
+    W8.value = calcWeighted("T8", 1/3);
+    W9.value = calcWeighted("T9", 1/3);
+
+    W10.value = roundCommercial(
+        (num("W7") || 0) + (num("W8") || 0) + (num("W9") || 0)
+    );
+
+	W7.value = roundCommercial(num("W7"))
+	W8.value = roundCommercial(num("W8"))
+	W9.value = roundCommercial(num("W9"))
+    if (num("W6") !== null || num("W10") !== null) {
+        W12.value = roundCommercial(		//W12 = Gesamtbewertung Präsentation und Fachgespräch
+            ((num("W6") || 0) + (num("W10") || 0)) / 2	//W6 = Zwischensumme Präsentation, W10 = Zwischensumme Fachgespräch
+        );
+    } else {
+        W12.value = "";
+    }
+    PO1.value = calcWeighted("PI1", 15/100);
+    PO2.value = calcWeighted("PI2", 15/100);
+    PO3.value = calcWeighted("PI3", 30/100);
+    PO4.value = calcWeighted("PI4", 15/100);
+    PO5.value = calcWeighted("PI5", 15/100);
+    PO6.value = calcWeighted("PI6", 10/100);
+    PO7.value = roundCommercial(	//PO7 = Gesamtbewertung Projektbericht
+        (num("PO1") || 0) + (num("PO2") || 0) + (num("PO3") || 0)+ (num("PO4") || 0)+ (num("PO5") || 0)+ (num("PO6") || 0)
+    );
+
+	PO1.value = roundCommercial(num("PO1"));
+	PO2.value = roundCommercial(num("PO2"));
+	PO3.value = roundCommercial(num("PO3"));
+	PO4.value = roundCommercial(num("PO4"));
+	PO5.value = roundCommercial(num("PO5"));
+	PO6.value = roundCommercial(num("PO6"));
+
+	//PO7 = Gesamtbewertung Projektbericht
+	E1.value = num("PO7");	  		// E1=Ergebnissektion Betriebliche Projektarbeit
+	E2.value = num("PO7")*50; 		// E2 = Ergebnissektion Gewichtung Betriebliche Projektarbeit
+	//W12 = Gesamtbewertung Präsentation und Fachgespräch
+	E3.value = num("W12");	  		// E3=Ergebnissektion Präsentation und Fachgespräch
+	E4.value = num("W12")*50; 		// E4 = Ergebnissektion Gewichtung Präsentation und Fachgespräch
+	E5.value = num("E2")+num("E4");	// E5 = Summe Gewichtung praktischer Teil (Projektarbeit + (Präsentation + Fachgespräch))
+	E6.value = num("E5")/100;
+	E7.value = num("E6")*50;
+	E8.value = num("E6");
+	E9.value = noteFromPunkte(num("E8"));
+	const map = {
+	  6: "nok",
+	  5: "med"
+	};
+	updateCellClass("bes4", map[num("E9")] ?? "ok");
+	recalcSummeTeil2()
+}
+
+function noteFromPunkte(Punkte) {
+    return (
+        (Punkte >= 92 && Punkte <= 100) ? "1" :
+        (Punkte >= 81 && Punkte <= 91)  ? "2" :
+        (Punkte >= 67 && Punkte <= 80)  ? "3" :
+        (Punkte >= 50 && Punkte <= 66)  ? "4" :
+        (Punkte >= 30 && Punkte <= 49)  ? "5" :
+        (Punkte >= 0  && Punkte <= 29)  ? "6" :
+        ""
+    );
+}
+
+
+
+["PI1","PI2","PI3","PI4","PI5","PI6","T3","T4","T5","T7","T8","T9"].forEach(id =>
+    document.getElementById(id).addEventListener("input", recalc)
+);
+</script>
+
+</body>
+</html>
